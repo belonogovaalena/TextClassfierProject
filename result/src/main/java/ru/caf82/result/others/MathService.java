@@ -1,8 +1,7 @@
 
 package ru.caf82.result.others;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import ru.caf82.result.exceptions.EmptyArrayException;
 import ru.caf82.result.exceptions.InconveninentShapeException;
 
