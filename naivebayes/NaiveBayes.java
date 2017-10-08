@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -40,9 +40,9 @@ public class NaiveBayes implements MlModel {
       for (int j=0; j<X[0].length; j++) {
           double xZer=0, xOne = 0;
           for (int k=0; k<X.length; k++) {
-              if ((X[j][k]==1)&& (y[k]==1))
+              if ((X[k][j]==1)&& (y[k]==1))
                  xOne++;
-              if ((X[j][k]==1)&& (y[k])==0)
+              if ((X[k][j]==1)&& (y[k])==0)
                   xZer++;
           }
           xOneProb[j] = xOne/yOne;
