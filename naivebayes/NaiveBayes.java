@@ -51,8 +51,8 @@ public class NaiveBayes implements MlModel {
       for (int k=0; k<X[0].length; k++) {
       weights[0][k] = xOneProb[k];
       weights[1][k] = xZerProb[k];
-      weights[2][0] = yOne;
-      weights[3][0] = yZer;
+      weights[2][0] = yOneProb;
+      weights[3][0] = yZerProb;
               }
        fitted = true;
       return this;
