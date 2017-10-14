@@ -245,7 +245,6 @@ public class MyOwnLinkedList<T> {
             element = el;
         }    
     }
-
     public static void main(String[] args) {
        try {
            MyOwnLinkedList myOwnLinkedList = new MyOwnLinkedList();
