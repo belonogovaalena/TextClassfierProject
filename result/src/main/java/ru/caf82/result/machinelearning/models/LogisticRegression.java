@@ -5,10 +5,15 @@
  */
 package ru.caf82.result.machinelearning.models;
 
+import java.io.IOException;
+import ru.caf82.naivebayes.ModelNotFittedException;
+import ru.caf82.result.exceptions.InconveninentShapeException;
+
 /**
  *
  * @author Алена
  */
-public class LogisticRegression extends AbstractModel {
+public class LogisticRegression  {
+
     
 }
