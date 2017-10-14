@@ -110,8 +110,6 @@ public class MyOwnArrayList<T> {
         System.out.print(inner[size-1] + "}\n");
     }
       
-    
-   
     public static void main(String[] args)  {
         MyOwnArrayList myOwnArrayList = new MyOwnArrayList();
         try {
