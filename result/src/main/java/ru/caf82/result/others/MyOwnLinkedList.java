@@ -20,10 +20,18 @@ public class MyOwnLinkedList<T> {
         if (last==null) {
             first = mll;
             last = mll;
+            first.next =last;
+            first.prev = last;
+            last.prev = first;
+            last.next = first;
         }
         else {
+            MyLinkedList saved = last;
             last.next = mll;
             last = mll;
+            last.prev = saved;
+            first.prev = last;
+            last.next = first;
         }
         size++;
     }
@@ -45,6 +53,7 @@ public class MyOwnLinkedList<T> {
                     now = now + 1;
                     counter = counter.next;
                 }
+                added.prev = counter;
                 added.next = counter.next;
                 counter.next = added;  
             }
@@ -53,7 +62,11 @@ public class MyOwnLinkedList<T> {
     }
     public void addFirst (T value) {
         MyLinkedList mll = new MyLinkedList(value);
-        mll.next = first;
+        MyLinkedList saved = first;
+        mll.next = saved;
+        mll.prev = last;
+        saved.prev = mll;
+        last.next = mll;
         first = mll;
         size++;
     }
@@ -64,19 +77,23 @@ public class MyOwnLinkedList<T> {
     
     public void printMyOwnLinkedList() {
         MyLinkedList mll = first;
-        while (mll!=null) {
+        int now = 0;
+        while (now!=size) {
             System.out.print(mll.element.toString()+ " ");
             mll = mll.next;
+            now++;
         }
         System.out.println();
     }
     
     public boolean contains (T value) {
         MyLinkedList mll = first;
-        while (mll!=null) {
+        int now = 0;
+        while (now!=size) {
             if (mll.element==value) 
                 return true; 
             mll = mll.next;
+            now++;
         }
         return false;
     }
@@ -84,6 +101,8 @@ public class MyOwnLinkedList<T> {
     public void remove () {
       MyLinkedList mustBeDeleted = first;
       first = mustBeDeleted.next;
+      first.prev = last;
+      last.next = first;
       mustBeDeleted = null;
       size--; 
     }
@@ -105,6 +124,7 @@ public class MyOwnLinkedList<T> {
             }
             MyLinkedList mustBeDeleted = counter.next;
              counter.next = mustBeDeleted.next; 
+             mustBeDeleted.next.prev = counter;
              mustBeDeleted = null;
              size--;
             }
@@ -114,12 +134,15 @@ public class MyOwnLinkedList<T> {
     public void remove (T value) throws OutOfBondsException {
         MyLinkedList mll = first;
         int position=0;
-        while ((mll!=null)&(mll.element!=value)){
+        if (position >size+1 )
+            throw new OutOfBondsException("Элемент не найден.");
+        else {
+        while ((mll.element!=value)){
            mll = mll.next;
            position++;
         }
         remove(position);
-        
+        }
     }
     
     public void removeFirst () {
@@ -128,10 +151,15 @@ public class MyOwnLinkedList<T> {
     
     public void removeLast() {
         MyLinkedList mll = first;
-        while (mll.next.next!=null)
+        int now = 0;
+        while (now!=size-1) {
             mll = mll.next;
+            now++;
+        }  
+        last = mll.prev;  
         mll.next = null;
-        last = mll;
+        last.next = first;
+        first.prev = last;
         size--;
        
     }
@@ -198,10 +226,17 @@ public class MyOwnLinkedList<T> {
                MyLinkedList mll = first; 
                first = moll.first;
                moll.last.next = mll;
+               mll.prev = moll.last;
+               last.next = first;
+               first.prev = last;
             }
             else {
                 if (index==size) {
-                   last.next = moll.first; 
+                   last.next = moll.first;
+                   moll.first.prev = last;
+                   last = moll.last;
+                   first.prev = last;
+                   last.next = first;
                 }
                 else {   
                     int now = 0;
@@ -212,9 +247,12 @@ public class MyOwnLinkedList<T> {
                     }
                 MyLinkedList saved = mll.next;
                 mll.next = moll.first;
+                moll.first.prev = mll;
                 moll.last.next = saved;
+                saved.prev = moll.last;
                 }
             }
+            size = size+mustBeAdded.length;
             return true; 
         }
     }
@@ -227,6 +265,11 @@ public class MyOwnLinkedList<T> {
         {
             MyOwnLinkedList moal = toBond(mustBeAdded);
             last.next = moal.first;
+            moal.first.prev = last;
+            last = moal.last;
+            first.prev = last;
+            last.next = first;
+            size = size+mustBeAdded.length;
             return true;
         }
     }
@@ -240,11 +283,13 @@ public class MyOwnLinkedList<T> {
     
     public class MyLinkedList<T> {
         MyLinkedList<T> next;
+        MyLinkedList<T> prev;
         T element;
         public MyLinkedList(T el) {
             element = el;
         }    
     }
+
     public static void main(String[] args) {
        try {
            MyOwnLinkedList myOwnLinkedList = new MyOwnLinkedList();
