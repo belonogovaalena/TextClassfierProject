@@ -13,7 +13,27 @@ import ru.caf82.result.exceptions.InconveninentShapeException;
  *
  * @author Алена
  */
-public class LogisticRegression  {
+public class LogisticRegression  implements MlModel{
+
+    @Override
+    public MlModel train(double[][] X, int[] y) throws InconveninentShapeException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int[] predict(double[] X) throws ru.caf82.result.exceptions.ModelNotFittedException, InconveninentShapeException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public double[] predictProba(double[] X) throws ru.caf82.result.exceptions.ModelNotFittedException, InconveninentShapeException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void saveToFile(String filename) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     
 }

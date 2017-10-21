@@ -13,7 +13,7 @@ import ru.caf82.result.exceptions.InconveninentShapeException;
  *
  * @author Алена
  */
-public interface MlModel {
+public interface MlModel{
     MlModel train(double[][] X, int[] y) throws InconveninentShapeException;
 
    int[] predict(double[] X) throws ModelNotFittedException, InconveninentShapeException;

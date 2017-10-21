@@ -11,12 +11,13 @@ package ru.caf82.result.machinelearning.models;
  */
 import java.io.IOException;
 import ru.caf82.result.exceptions.InconveninentShapeException;
+import java.io.Serializable;
 
 /**
  *
  * @author Алена
  */
-public class NaiveBayes implements MlModel {
+public class NaiveBayes implements MlModel, Serializable {
    private float alpha;
    private double[][] weights;
    private boolean fitted;

@@ -21,12 +21,12 @@ public class KNeighbourhood implements MlModel{
     }
 
     @Override
-    public int[] predict(double[] X) throws ModelNotFittedException, InconveninentShapeException {
+    public int[] predict(double[] X) throws  InconveninentShapeException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public double[] predictProba(double[] X) throws ModelNotFittedException, InconveninentShapeException {
+    public double[] predictProba(double[] X) throws  InconveninentShapeException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
