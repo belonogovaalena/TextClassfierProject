@@ -39,7 +39,7 @@ public class MyOwnArrayList<T> {
       T[] oldInner = (T[])Array.newInstance(innerClass, size-1);
       oldInner = inner;
       if (size>capacity) 
-        ensureCapacity(size);
+          ensureCapacity((capacity*3)/2+1);
       inner = (T[])Array.newInstance(innerClass, capacity);
       for (int i = 0; i<size-1; i++)
           inner[i]=oldInner[i];
@@ -60,7 +60,7 @@ public class MyOwnArrayList<T> {
         T[] oldInner = (T[])Array.newInstance(innerClass, size-1);
         oldInner = inner;
         if (size>capacity) 
-            ensureCapacity(size);
+            ensureCapacity((capacity*3)/2+1);
         inner = (T[])Array.newInstance(innerClass, capacity);
         for (int i = 0; i<position; i++)
             inner[i]=oldInner[i];
@@ -108,6 +108,8 @@ public class MyOwnArrayList<T> {
         System.out.print(inner[size-1] + "}\n");
     }
       
+    
+   
     public static void main(String[] args)  {
         MyOwnArrayList myOwnArrayList = new MyOwnArrayList();
         try {
@@ -132,7 +134,7 @@ public class MyOwnArrayList<T> {
             System.out.println("Вместимость сейчас: ");
             System.out.println(myOwnArrayList.capacity);
             myOwnArrayList.ensureCapacity(15);
-            System.out.println("Увеличили вместимоть до 15. Вместимость теперь: ");
+            System.out.println("Увеличили вместимоть на 5. Вместимость теперь: ");
             System.out.println(myOwnArrayList.capacity);
             System.out.println("Элемент 4 находится на месте:");
             int num = myOwnArrayList.indexOf(4);
