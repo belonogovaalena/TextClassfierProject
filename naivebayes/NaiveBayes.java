@@ -23,7 +23,7 @@ public class NaiveBayes implements MlModel {
    public MlModel train(double[][] X, int[] y) throws InconveninentShapeException {
       //считаем у=0 и y=1
       if (X.length != y.length) 
-          throw new InconveninentShapeException();
+          throw new InconveninentShapeException("Неверные входные параметры.");
       double yZer = 0, yOne = 0;
       for (int i=0; i<y.length; i++) {
           if (y[i]==0)
@@ -48,13 +48,18 @@ public class NaiveBayes implements MlModel {
           xOneProb[j] = xOne/yOne;
           xZerProb[j] = xZer/yZer;
       }
+      weights = new double[4][];
+      weights[0] = new double[X[0].length];
+      weights[1] = new double[X[0].length];
+      weights[2] = new double[1];
+      weights[3] = new double[1];
       for (int k=0; k<X[0].length; k++) {
-      weights[0][k] = xOneProb[k];
-      weights[1][k] = xZerProb[k];
+         weights[0][k] = xOneProb[k];
+         weights[1][k] = xZerProb[k];
+      }
       weights[2][0] = yOneProb;
       weights[3][0] = yZerProb;
-              }
-       fitted = true;
+      fitted = true;
       return this;
     }
    public int[] predict(double[] X) throws ModelNotFittedException, InconveninentShapeException {
@@ -69,6 +74,10 @@ public class NaiveBayes implements MlModel {
        return myPredict;
     }
    public double[] predictProba(double[] X) throws ModelNotFittedException, InconveninentShapeException {
+       if (!isFitted())
+           throw new ModelNotFittedException("Модель не обучена");
+       if (X.length!=weights[0].length)
+           throw new InconveninentShapeException("Неверные входные параметры");
        double[] myPredict = new double[X.length];
        for (int i=0; i<X.length; i++) {
            double znam = (weights[0][i]*weights[2][0])+(weights[1][i]*weights[3][0]);
@@ -90,13 +99,10 @@ public class NaiveBayes implements MlModel {
    
    public double[][] getWeights() {
        return weights; 
-       ///просто чтобы не ругался
+       
    } 
    public boolean isFitted() {
        return fitted;
-       // просто чтобы не ругался
+     
    }
-
-
-   
 }
