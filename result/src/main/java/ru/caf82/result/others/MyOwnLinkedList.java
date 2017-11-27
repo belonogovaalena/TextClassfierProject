@@ -3,9 +3,10 @@ package ru.caf82.result.others;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import ru.caf82.result.exceptions.OutOfBondsException;
 
-public class MyOwnLinkedList<T> {
+public class MyOwnLinkedList<T> implements Iterable<T>{
 
    private MyLinkedList<T> first;
    private MyLinkedList<T> last;
@@ -280,7 +281,26 @@ public class MyOwnLinkedList<T> {
             moll.add(array[i]);
         return moll;    
     }
-    
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            MyLinkedList<T> nowPosition = first;
+
+            @Override
+            public boolean hasNext() {
+                
+                return nowPosition.next!=first;
+            }
+
+            @Override
+            public T next() {
+         nowPosition = nowPosition.next;     
+        return (T) nowPosition.prev.element;
+        
+        }
+    };
+    }  
     public class MyLinkedList<T> {
         MyLinkedList<T> next;
         MyLinkedList<T> prev;
@@ -357,8 +377,12 @@ public class MyOwnLinkedList<T> {
            System.out.println("Вставим ее на место 1: ");
            myOwnLinkedList.addAll(1, col);
            myOwnLinkedList.printMyOwnLinkedList();
+           Iterator<String> iter = myOwnLinkedList.iterator();
+       while (iter.hasNext())
+           System.out.println(iter.next());
        } catch (OutOfBondsException ex) {
            System.out.println(ex.getMessage());
        }
+       
     }   
 }

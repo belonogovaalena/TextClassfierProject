@@ -2,11 +2,12 @@
 package ru.caf82.result.others;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
 import ru.caf82.result.exceptions.InconveninentTypesException;
 import ru.caf82.result.exceptions.OutOfBondsException;
 
 
-public class MyOwnArrayList<T> {
+public class MyOwnArrayList<T> implements Iterable<T> {
     
     private T[] inner;
     private Class<?> innerClass;
@@ -156,7 +157,27 @@ public class MyOwnArrayList<T> {
         } catch (OutOfBondsException ex) {
             System.out.println(ex.getMessage());
         }
-       
+        Iterator<Integer> iter = myOwnArrayList.iterator();
+       while (iter.hasNext())
+           System.out.println(iter.next());
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            int nowPosition;
+            @Override
+            public boolean hasNext() {
+               
+                   return nowPosition<size;
+            }
+
+            @Override
+            public T next() {
+                return inner[nowPosition++];                
+            }
+            
+        };
     }
     
 }
